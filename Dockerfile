@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk add --update --no-cache bash ca-certificates python3 \
+RUN apk add --update --no-cache bash ca-certificates python3 supervisor \
     && python3 -m ensurepip \
     && rm -r /usr/lib/python*/ensurepip \
     && pip3 install --no-cache-dir --upgrade pip setuptools \
@@ -12,8 +12,13 @@ RUN apk add --no-cache --virtual .build-deps gcc python3-dev libffi-dev musl-dev
         devpi-web \
         devpi-client \
         devpi-cleaner \
-        devpi-semantic-ui \
+    devpi-semantic-ui \
     && apk del .build-deps
+
+# packaging still gets deleted, a quick fix is to re pip install everything
+# from above.
+RUN pip install --no-cache-dir devpi-server devpi-web devpi-client \
+    devpi-cleaner devpi-semantic-ui
 
 ENV DEVPI_THEME=semantic-ui
 
