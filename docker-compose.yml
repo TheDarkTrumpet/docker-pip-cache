@@ -12,10 +12,12 @@ services:
         Commit: ${CI_COMMIT_DESC}
     restart: unless-stopped
     ports:
-      - 3141:3141
+      - "127.0.0.1:3141:3141"
     volumes:
       - $PWD/config:/config
-      - /Volumes/extDisk/pipcache:/data
-    entrypoint: /bin/sh
-    stdin_open: true
-    tty: true
+      - pip-cache:/data
+#    entrypoint: /bin/sh
+#    stdin_open: true
+#    tty: true
+volumes:
+  pip-cache:

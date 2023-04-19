@@ -6,7 +6,8 @@ DEVPI_SERVERDIR="/data/server"
 DEVPI_CLIENTDIR="/data/client"
 
 
-/usr/bin/supervisord -c /conf/supervisord.conf
+echo "[RUN]: Starting devpi-server"
+/usr/bin/supervisord -c /config/supervisord.conf
 
 # exec /usr/bin/devpi-server --host 0.0.0.0 --port 3141 --restrict-modify root --threads 20
 
@@ -20,5 +21,5 @@ if [ ! -f  $DEVPI_SERVERDIR/.serverversion ]; then
     devpi index -y -c public pypi_whitelist='*'
 fi
 
-echo "Sleeping til we quit"
+echo "[INFO]: Sleeping til we quit"
 while true; do sleep 1000; done
