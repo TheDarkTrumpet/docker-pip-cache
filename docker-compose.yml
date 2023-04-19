@@ -6,10 +6,6 @@ services:
     container_name: pipcache
     build:
       context: .
-
-      labels:
-        Vendor: "LiveU"
-        Commit: ${CI_COMMIT_DESC}
     restart: unless-stopped
     ports:
       - "127.0.0.1:3141:3141"
