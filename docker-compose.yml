@@ -16,6 +16,14 @@ services:
     volumes:
       - $PWD/config:/config
       - pip-cache:/data
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 1024M
+        reservations:
+          cpus: "2"
+          memory: 500M
 #    entrypoint: /bin/sh
 #    stdin_open: true
 #    tty: true
